@@ -17,6 +17,22 @@ Note. Please note that we are gonna test the funcion against a lot of different 
 """
 
 
-def flatonacci(signature: list, n: int) -> list:
-    # happy coding
-    pass
+def flatonacci(signature: list, n: int):
+    sequence = []
+    """
+    This conditional verifies some cases to provide safety to the function,
+    (even if we know the stated scenarios):
+        - n is bigger than 0 (it's a non-negative number)
+        - signature is equal to 3 and contains only integers and/or float numbers
+        - a second safety layer is added by wrapping all inside an exception block
+    """
+    try:
+        if n < 0 or len(signature) != 3 or not all(isinstance(s, (int)) for s in signature):
+            return sequence
+        else:
+            sequence += signature
+            while (len(sequence) < n):
+                sequence.append(sum(sequence[-3:]))
+    except (NameError, RuntimeError, TypeError, ValueError) as error:
+        return ['Something went wrong. Please verify the input data and try again.', error]
+    return sequence
